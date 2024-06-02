@@ -170,7 +170,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -213,7 +214,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -226,7 +228,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -239,7 +242,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -252,7 +256,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -265,7 +270,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -10909,10 +10915,61 @@
   },
   "networks": {
     "97": {
-      "events": {},
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xfaBb6e7971F41514c241C80cbC9d39b3A2df5332",
-      "transactionHash": "0xaff5b9c7926c5ed0f13f00182365b02d64443b79e7b73bc1dd92db00639a973a"
+      "address": "0xc8186FC854846380A269c8333a55C7f6A21D7363",
+      "transactionHash": "0x4496acc0c709393685e35fe7472e0a7078be7dd491a848133fe76cafc66753d6"
     },
     "5777": {
       "events": {},
@@ -10922,7 +10979,8 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-27T22:53:57.498Z",
+  "updatedAt": "2024-05-28T14:13:46.116Z",
+  "networkType": "ethereum",
   "devdoc": {
     "errors": {
       "ERC20InsufficientAllowance(address,uint256,uint256)": [

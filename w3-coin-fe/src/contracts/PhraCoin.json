@@ -319,5 +319,10 @@
           "stateMutability": "nonpayable",
           "type": "function"
         }
-      ]
+      ],
+      "networks": {
+        "97": {
+          "address": "0x2fAC1f369B4f697615E865f8ce9a8C435e173B6e"
+        }
+      }
 }

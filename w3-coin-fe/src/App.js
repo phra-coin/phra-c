@@ -1,59 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import Web3 from 'web3';
-import PhraCoin from './contracts/PhraCoin.json';
+import { ethers } from 'ethers';
 
-function App() {
-  const [account, setAccount] = useState('');
-  const [web3, setWeb3] = useState(null);
-  const [contract, setContract] = useState(null);
+const WalletBalance = () => {
   const [balance, setBalance] = useState(0);
+  const [account, setAccount] = useState(null);
+
+  const tokenAddress = '0x06ffad1df61fc7089831afb2c7a4f9cf59bd46fd'; // contract address ของ TESTPHRA
+  const tokenAbi = [
+    // ABI ของ contract TESTPHRA
+    "function balanceOf(address owner) view returns (uint256)",
+    "function decimals() view returns (uint8)"
+  ];
 
   useEffect(() => {
-    async function loadBlockchainData() {
+    const connectWallet = async () => {
       if (window.ethereum) {
         try {
-          const web3 = new Web3(window.ethereum);
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const accounts = await web3.eth.getAccounts();
-          if (accounts.length > 0) {
-            setAccount(accounts[0]);
-            const networkId = await web3.eth.net.getId();
-            console.log('Detected network ID:', networkId);
-            const deployedNetwork = PhraCoin.networks && PhraCoin.networks[networkId];
-            if (deployedNetwork) {
-              console.log('Deployed network:', deployedNetwork);
-              const contract = new web3.eth.Contract(
-                PhraCoin.abi,
-                deployedNetwork.address
-              );
-              setContract(contract);
-              const balance = await contract.methods.balanceOf(accounts[0]).call();
-              setBalance(web3.utils.fromWei(balance, 'ether'));
-            } else {
-              alert('Smart contract not deployed to detected network.');
-            }
-            setWeb3(web3);
-          } else {
-            console.error('No accounts detected.');
-          }
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          setAccount(accounts[0]);
+          
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, provider);
+          const balance = await tokenContract.balanceOf(accounts[0]);
+          setBalance(ethers.formatUnits(balance, 0));
         } catch (error) {
-          console.error('Error loading blockchain data:', error);
+          console.error("Error connecting to wallet:", error);
         }
       } else {
-        console.error('MetaMask not detected.');
+        console.log("No wallet detected");
       }
-    }
+    };
 
-    loadBlockchainData();
+    connectWallet();
   }, []);
 
   return (
     <div>
-      <h1>Phra Coin (PHRA)</h1>
-      <p>Your account: {account}</p>
-      <p>Your balance: {balance} PHRA</p>
+      <h1>Account: {account}</h1>
+      <h2>Balance: {balance} TESTPHRA</h2>
     </div>
   );
-}
+};
 
-export default App;
+export default WalletBalance;

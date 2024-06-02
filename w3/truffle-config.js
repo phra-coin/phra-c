@@ -72,12 +72,24 @@ module.exports = {
       gas: 8000000, // Increase gas limit
       gasPrice: 10000000000, // Set gas price (in wei)
     },
-    bscTestnet: {
-      provider: () => new HDWalletProvider(mnemonic, 'https://data-seed-prebsc-1-s1.binance.org:8545/'),
+    bsctestnet: {
+      provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-1-s1.binance.org:8545`),
       network_id: 97,
       confirmations: 10,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
+      networkCheckTimeout: 1000000, // เพิ่มการตั้งค่า timeout
+    },    
+    compilers: {
+      solc: {
+        version: "0.8.21",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200
+          }
+        }
+      }
     },
     bscMainnet: {
       provider: () => new HDWalletProvider(mnemonic, 'https://bsc-dataseed.binance.org/'),
